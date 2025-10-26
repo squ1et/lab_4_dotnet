@@ -5,8 +5,93 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:lab_4"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="Employee Salary Calculator" Height="500" Width="600"
+        FontFamily="Segoe UI" FontSize="14">
+    <Window.Resources>
+        <!-- Style for clean, rounded buttons -->
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#FF99CCFF"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="15,5"/>
+            <Setter Property="Margin" Value="0,10,0,0"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="8" 
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Style for Input Labels -->
+        <Style TargetType="TextBlock" x:Key="LabelStyle">
+            <Setter Property="Margin" Value="0,10,0,3"/>
+            <Setter Property="Foreground" Value="#FF336699"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+
+        <!-- Style for Result Text -->
+        <Style TargetType="TextBlock" x:Key="ResultStyle">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#FF009933"/>
+            <Setter Property="Margin" Value="0,15,0,0"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="#FFF0F8FF">
+        <TabControl Margin="20" BorderBrush="#FF99CCFF" BorderThickness="1" Background="White">
+
+            <!-- Programmer Tab -->
+            <TabItem Header="Programmer" Background="#FFE0F0FF">
+                <StackPanel Margin="20">
+                    <TextBlock Style="{StaticResource LabelStyle}" Text="1. Select Developer Level:" />
+                    <ComboBox x:Name="ProgrammerLevelComboBox" SelectedIndex="0" Height="30">
+                        <ComboBoxItem Content="Senior"/>
+                        <ComboBoxItem Content="Junior"/>
+                    </ComboBox>
+
+                    <TextBlock Style="{StaticResource LabelStyle}" Text="2. Developer Role (Hardcoded Annual Salary: $120,000 for Senior, $60,000 for Junior)"/>
+
+                    <Button Content="Calculate Programmer Salary" Click="ProgrammerCalculateButton_Click"/>
+
+                    <Separator Margin="0,20"/>
+
+                    <TextBlock Text="Monthly Salary:" Style="{StaticResource LabelStyle}"/>
+                    <TextBlock x:Name="ProgrammerSalaryResult" Style="{StaticResource ResultStyle}" Text="$0.00"/>
+
+                    <TextBlock Style="{StaticResource LabelStyle}" Text="Current Projects:"/>
+                    <ListBox x:Name="ProgrammerProjectsList" Height="100" BorderBrush="#FF99CCFF" Background="#FFFAFAFF"/>
+                </StackPanel>
+            </TabItem>
+
+            <!-- Designer Tab -->
+            <TabItem Header="Designer" Background="#FFE0F0FF">
+                <StackPanel Margin="20">
+                    <TextBlock Style="{StaticResource LabelStyle}" Text="1. Enter Project Hours Worked This Month:" />
+                    <TextBox x:Name="DesignerHoursTextBox" Text="150" Height="30" Padding="5"/>
+
+                    <TextBlock Style="{StaticResource LabelStyle}" Text="2. Designer Specialization (Hardcoded Annual Salary: $90,000)"/>
+                    <TextBlock x:Name="DesignerSpecializationText" FontWeight="Normal" Text="UI/UX"/>
+
+                    <Button Content="Calculate Designer Salary" Click="DesignerCalculateButton_Click"/>
+
+                    <Separator Margin="0,20"/>
+
+                    <TextBlock Text="Monthly Salary:" Style="{StaticResource LabelStyle}"/>
+                    <TextBlock x:Name="DesignerSalaryResult" Style="{StaticResource ResultStyle}" Text="$0.00"/>
+
+                    <TextBlock Style="{StaticResource LabelStyle}" Text="Current Projects:"/>
+                    <ListBox x:Name="DesignerProjectsList" Height="100" BorderBrush="#FF99CCFF" Background="#FFFAFAFF"/>
+                </StackPanel>
+            </TabItem>
+
+        </TabControl>
     </Grid>
 </Window>
