@@ -65,5 +65,26 @@ namespace UnitTest
             // Assert
             CollectionAssert.AreEqual(expectedProjects, actualProjects);
         }
+        [TestMethod]
+        public void Programmer_Implements_IProjectAssignable()
+        {
+            // Arrange
+            Programmer programmer = new Programmer("Developer", 3, 90000.00, "Mid");
+
+            // Assert: Перевіряємо, чи клас реалізує інтерфейс IProjectAssignable
+            Assert.IsInstanceOfType<IProjectAssignable>(programmer);
+        }
+
+        [TestMethod]
+        public void Programmer_Implements_ILevelable()
+        {
+            // Arrange
+            Programmer programmer = new Programmer("Developer", 3, 90000.00, "Mid");
+
+            // Assert: Перевіряємо, чи клас реалізує інтерфейс ILevelable та чи правильно повертається властивість
+            Assert.IsInstanceOfType<ILevelable>(programmer);
+            ILevelable levelable = (ILevelable)programmer;
+            Assert.AreEqual("Mid", levelable.Level);
+        }
     }
 }

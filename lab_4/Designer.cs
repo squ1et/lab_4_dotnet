@@ -6,34 +6,32 @@ using System.Threading.Tasks;
 
 namespace lab_4
 {
-    public class Designer : Employee
+    public class Designer : Employee, IProjectIncomeCalculable, IProjectAssignable
     {
         public string Specialization { get; set; }
-
-        public int ProjectHoursWorked { get; set; }
+        public int ProjectHoursWorked { get; set; } = 0; 
 
         public Designer(string role, int exp, double salary, string specialization)
             : base(role, exp, salary)
         {
             Specialization = specialization;
-            this.ProjectHoursWorked = 0;
         }
 
-        public double CalculateProjectIncome(int hours)
+        public double CalculateProjectIncome(int hours) 
         {
-            double hourlyRate = this.AnnualSalary / 2080.0;
-            return hourlyRate * hours * 1.5;
+            const double AnnualWorkingHours = 2080.0;
+            const double ProjectMarkup = 1.5;
+
+            double hourlyBaseRate = AnnualSalary / AnnualWorkingHours;
+            return hourlyBaseRate * hours * ProjectMarkup;
         }
 
         public override double CalcMonthSalary()
         {
-            double monthlyBaseSalary = this.AnnualSalary / 12.0;
-
-            double variableIncome = CalculateProjectIncome(this.ProjectHoursWorked);
-
-            return monthlyBaseSalary + variableIncome;
+            double monthlyBaseSalary = AnnualSalary / 12.0;
+            double projectIncome = CalculateProjectIncome(ProjectHoursWorked);
+            return monthlyBaseSalary + projectIncome;
         }
-
 
         public override string[] GetProjectsList()
         {

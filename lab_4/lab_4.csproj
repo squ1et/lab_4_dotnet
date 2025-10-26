@@ -66,6 +66,9 @@
     </Compile>
     <Compile Include="Designer.cs" />
     <Compile Include="Employee.cs" />
+    <Compile Include="ILevelable.cs" />
+    <Compile Include="IProjectAssignable.cs" />
+    <Compile Include="IProjectIncomeCalculable.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

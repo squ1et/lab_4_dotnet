@@ -77,6 +77,31 @@ namespace UnitTest
             // Assert
             CollectionAssert.AreEqual(expectedProjects, actualProjects);
         }
+
+        [TestMethod]
+        public void Designer_Implements_IProjectAssignable()
+        {
+            // Arrange
+            Designer designer = new Designer("Designer", 3, 90000.00, "Graphic");
+
+            Assert.IsInstanceOfType(designer, typeof(IProjectAssignable));
+
+        }
+
+        [TestMethod]
+        public void Designer_Implements_IProjectIncomeCalculable()
+        {
+            Designer designer = new Designer("Designer", 3, 90000.00, "Graphic");
+
+            Assert.IsInstanceOfType(designer, typeof(IProjectIncomeCalculable));
+
+            IProjectIncomeCalculable incomeCalculator = (IProjectIncomeCalculable)designer;
+
+            double expectedIncome = designer.CalculateProjectIncome(50);
+            double actualIncome = incomeCalculator.CalculateProjectIncome(50);
+
+            Assert.AreEqual(expectedIncome, actualIncome, Tolerance);
+        }
     }
 }
 
